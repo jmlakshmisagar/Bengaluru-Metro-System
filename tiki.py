@@ -1,49 +1,85 @@
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
+from datetime import datetime
+import qrcode
 from metro import *
+from D_T_A import *
 
-green_line_stations =[ 14,'Nagasandra', 'Dasarahalli', 'Jalahalli', 'Peenya_Industry', 'Peenya', 'Goraguntepalya', 'Yeshwanthpura', 'Sandal_Soap_Factory', 'Mahalakshmi', 'Rajajinagara', 'Kuvempu_Road', 'Srirampura', 'Sampige_Road', 'Nadaprabhu_Kempegowda_station_(Majestic)', 'Chikkapette', 'Krishna_Rajendra_Market', 'National_College', 'Lalbagh_Botanical_Garden', 'South_End_Circle', 'Jayanagara', 'Rashtreeya_Vidyalaya_Road', 'Banashankari', 'Jaya_Prakash_Nagara', 'Yelachenahalli', 'Konanakunte_Cross', 'Doddakallasandra', 'Vajarahalli', 'Talaghattapura', 'Silk_Institute','Whitefield_(Kadugodi)', 'Hopefarm_Channasandra', 'Kadugodi_Tree_Park', 'Pattanduru_Agrahara', 'Sri_Sathya_Sai_Hospital', 'Nallurhalli', 'Kundalahalli', 'Seetharamapalya', 'Hoodi', 'Garudacharapalya', 'Singayyanapalya', 'Krishnarajapura_(K.R.Pura)', 'Benniganahalli', 'Baiyappanahalli', 'Swami_Vivekananda_Road', 'Indiranagara', 'Halasuru', 'Trinity', 'MG_Road', 'Cubbon_Park', 'Dr._BR._Ambedkar_Station_(Vidhana_Soudha)', 'Sir_M._Visveshwaraya_Station_(Central_College)', 'Nadaprabhu_Kempegowda_station_(Majestic)', 'City_Railway_station', 'Magadi_Road', 'Sri_Balagangadharanatha_Swamiji_Station_(Hosahalli)', 'Vijayanagara', 'Attiguppe', 'Deepanjali_Nagara', 'Mysuru_Road', 'Pantharapalya_(Nayandahalli)', 'Rajarajeshwari_Nagar', 'Jnanabharathi', 'Pattanagere', 'Kengeri_Bus_Terminal', 'Kengeri', 'Challaghatta']
-purple_line_stations = [14,'Nagasandra', 'Dasarahalli', 'Jalahalli', 'Peenya_Industry', 'Peenya', 'Goraguntepalya', 'Yeshwanthpura', 'Sandal_Soap_Factory', 'Mahalakshmi', 'Rajajinagara', 'Kuvempu_Road', 'Srirampura', 'Sampige_Road', 'Nadaprabhu_Kempegowda_station_(Majestic)', 'Chikkapette', 'Krishna_Rajendra_Market', 'National_College', 'Lalbagh_Botanical_Garden', 'South_End_Circle', 'Jayanagara', 'Rashtreeya_Vidyalaya_Road', 'Banashankari', 'Jaya_Prakash_Nagara', 'Yelachenahalli', 'Konanakunte_Cross', 'Doddakallasandra', 'Vajarahalli', 'Talaghattapura', 'Silk_Institute','Whitefield_(Kadugodi)', 'Hopefarm_Channasandra', 'Kadugodi_Tree_Park', 'Pattanduru_Agrahara', 'Sri_Sathya_Sai_Hospital', 'Nallurhalli', 'Kundalahalli', 'Seetharamapalya', 'Hoodi', 'Garudacharapalya', 'Singayyanapalya', 'Krishnarajapura_(K.R.Pura)', 'Benniganahalli', 'Baiyappanahalli', 'Swami_Vivekananda_Road', 'Indiranagara', 'Halasuru', 'Trinity', 'MG_Road', 'Cubbon_Park', 'Dr._BR._Ambedkar_Station_(Vidhana_Soudha)', 'Sir_M._Visveshwaraya_Station_(Central_College)', 'Nadaprabhu_Kempegowda_station_(Majestic)', 'City_Railway_station', 'Magadi_Road', 'Sri_Balagangadharanatha_Swamiji_Station_(Hosahalli)', 'Vijayanagara', 'Attiguppe', 'Deepanjali_Nagara', 'Mysuru_Road', 'Pantharapalya_(Nayandahalli)', 'Rajarajeshwari_Nagar', 'Jnanabharathi', 'Pattanagere', 'Kengeri_Bus_Terminal', 'Kengeri', 'Challaghatta']
+current_date_time = datetime.now()
+current_date = current_date_time.date()
 
-def distance(source, destination):
-    if source in green_line_stations and destination in green_line_stations:
-        return abs(green_line_stations.index(source) - green_line_stations.index(destination))
-    elif source in purple_line_stations and destination in purple_line_stations:
-        return abs(purple_line_stations.index(source) - purple_line_stations.index(destination))
-    elif source in purple_line_stations and destination in green_line_stations:
-        p = abs(purple_line_stations.index(source) - purple_line_stations.index(purple_line_stations[0]))
-        g = abs(green_line_stations.index(destination) - green_line_stations.index(green_line_stations[0]))
-        return p + g
-    elif source in green_line_stations and destination in purple_line_stations:
-        g = abs(green_line_stations.index(source) - green_line_stations.index(green_line_stations[0]))
-        p = abs(purple_line_stations.index(destination) - purple_line_stations.index(purple_line_stations[0]))
-        return g + p
-    else:
-        print("Invalid Station Name")
+def show_qr_code():
+    qr_img_window = tk.Toplevel()
+    qr_img_window.title("QR Code")
+
+    qr_code_img = Image.open("qr_code.png")
+    qr_code_img_tk = ImageTk.PhotoImage(qr_code_img)
+
+    qr_label = tk.Label(qr_img_window, image=qr_code_img_tk)
+    qr_label.image = qr_code_img_tk  
+    qr_label.pack()
 
 def result():
-    current_location = current_location_combobox.get()
-    destination = destination_combobox.get()
-
-    print("Current Location:", current_location)
-    print("Destination:", destination)
-
-    print("Data type of Current Location:", type(current_location))
-    print("Data type of Destination:", type(destination))
-
-    if current_location in green_line_stations or current_location in purple_line_stations:
-        if destination in green_line_stations or destination in purple_line_stations:
-            dist = distance(current_location, destination)
-            info_label.config(text=f"Distance: {dist} units\n Estimated time : {dist*2.5} min \n Estimated cost : {round(dist/3*2.72)} Rupees", fg="black")
-        else:
-            info_label.config(text="Invalid Destination Station", fg="red")
+    source = current_location_var.get()
+    destination = destination_var.get()
+    
+    if source == destination:
+        info_label.config(text="Source and Destination cannot be the same.", fg="red")
+    elif source not in stations or destination not in stations:
+        info_label.config(text="Source or destination not found.", fg="red")
+        print("Source or destination not found.")
     else:
-        info_label.config(text="Invalid Current Location Station", fg="red")
+        source_index = -1
+        for i, row in enumerate(l):
+            if row[0][0] == source:
+                source_index = i
+                break
 
+        destination_index = -1
+        for i, row in enumerate(l[0]):
+            if row[0] == destination:
+                destination_index = i
+                break
+        
+        if source_index == -1 or destination_index == -1:
+            print("Source or destination not found.")
+        else:
+            distance = l[source_index][destination_index][0]
+            time = l[source_index][destination_index][1]
+            amount = l[source_index][destination_index][2]
+            
+            print("Source:" ,source)
+            print("Destination:",destination)
+            print("Distance:", distance)
+            print("Time:", time)
+            print("Amount:", amount)
+
+
+        data = f"Source : {source}\n , Destination : {destination}\n , Distance : {distance}units\n , Time : {time}min\n , Amount : {amount}rupees\n ,Current Date : {current_date} "
+
+        qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+
+        qr.add_data(data)
+        qr.make(fit=True)
+
+        img = qr.make_image(fill_color="black", back_color="white")
+
+        img.save("qr_code.png")
+
+        print("QR code generated successfully.")
+
+        info_label.config(text=f"NO. of Stations to cross : {stops(source,destination)} \n Distance : {distance}\nEstimated time : {time} min\nEstimated amount : {amount} rupees \nCurrent Date : {current_date}", fg="black")
+
+        show_qr_code()
+
+def reset_selection():
+    current_location_var.set("Select Current Location")
+    destination_var.set("Select Destination")
+    info_label.config(text=" Hello traveler ")
 
 app = tk.Tk()
-app.geometry("500x550")
+app.geometry("500x650")
 app.title("Metro System")
 app.config(bg='#808080')
 
@@ -60,19 +96,30 @@ frame.pack(pady=20, padx=40, fill='both', expand=True)
 image_label = tk.Label(master=frame, image=tk_img, bg='#34495e')
 image_label.pack(pady=15, padx=10)
 
-current_location_combobox = ttk.Combobox(frame, values=green_line_stations, font=('System', 12))
-current_location_combobox.set("Select Current Location")
-current_location_combobox.pack(pady=12, padx=10)
+stations = ['Attiguppe', 'Baiyappanahalli', 'Banashankari', 'Benniganahalli', 'Challaghatta', 'Chikkapette', 'City_Railway_station', 'Cubbon_Park', 'Dasarahalli', 'Deepanjali_Nagara', 'Doddakallasandra', 'Dr._BR._Ambedkar_Station_(Vidhana_Soudha)', 'Garudacharapalya', 'Goraguntepalya', 'Halasuru', 'Hoodi', 'Hopefarm_Channasandra', 'Indiranagara', 'Jalahalli', 'Jaya_Prakash_Nagara', 'Jayanagara', 'Jnanabharathi', 'Kadugodi_Tree_Park', 'Kengeri', 'Kengeri_Bus_Terminal', 'Konanakunte_Cross', 'Krishna_Rajendra_Market', 'Krishnarajapura_(K.R.Pura)', 'Kundalahalli', 'Kuvempu_Road', 'Lalbagh_Botanical_Garden', 'MG_Road', 'Magadi_Road', 'Mahalakshmi', 'Mysuru_Road', 'Nadaprabhu_Kempegowda_station_(Majestic)', 'Nagasandra', 'Nallurhalli', 'National_College', 'Pantharapalya_(Nayandahalli)', 'Pattanagere', 'Pattanduru_Agrahara', 'Peenya', 'Peenya_Industry', 'Rajajinagara', 'Rajarajeshwari_Nagar', 'Rashtreeya_Vidyalaya_Road', 'Sampige_Road', 'Sandal_Soap_Factory', 'Seetharamapalya', 'Silk_Institute', 'Singayyanapalya', 'Sir_M._Visveshwaraya_Station_(Central_College)', 'South_End_Circle', 'Sri_Balagangadharanatha_Swamiji_Station_(Hosahalli)', 'Sri_Sathya_Sai_Hospital', 'Srirampura', 'Swami_Vivekananda_Road', 'Talaghattapura', 'Trinity', 'Vajarahalli', 'Vijayanagara', 'Whitefield_(Kadugodi)', 'Yelachenahalli', 'Yeshwanthpura']
 
-destination_combobox = ttk.Combobox(frame, values=purple_line_stations, font=('System', 12))
-destination_combobox.set("Select Destination")
-destination_combobox.pack(pady=12, padx=10)
+current_location_var = tk.StringVar()
+current_location_var.set("Select Current Location")
+destination_var = tk.StringVar()
+destination_var.set("Select Destination")
 
-button = tk.Button(master=frame, text='Calculate', command=result, bg='#2980b9', fg='white', font=('Helvetica', 12), bd=0, relief='flat')
+source = ttk.Combobox(frame, textvariable=current_location_var, values=stations, font=('System', 12))
+source.pack(pady=12, padx=15)
+
+destination = ttk.Combobox(frame, textvariable=destination_var, values=stations, font=('System', 12))
+destination.pack(pady=12, padx=115)
+
+button = tk.Button(master=frame, text='Generate', command=result, bg='#2980b9', fg='white', font=('Helvetica', 12), bd=0, relief='flat')
 button.pack(pady=12, padx=10)
 button.configure(borderwidth=1, relief='solid')
 
-info_label = tk.Label(frame, text="", fg='#34495e', font=('System', 12))
+reset_button = tk.Button(master=frame, text='Reset', command=reset_selection, bg='#2980b9', fg='white', font=('Helvetica', 12), bd=0, relief='flat')
+reset_button.pack(pady=10, padx=10)
+reset_button.configure(borderwidth=1, relief='solid')
+
+info_label = tk.Label(frame, text=" Hello traveler ", fg='#34495e', font=('System', 12))
 info_label.pack(pady=10)
+
+
 
 app.mainloop()
