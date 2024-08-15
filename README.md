@@ -1,4 +1,3 @@
-![error](https://github.com/user-attachments/assets/7316fd65-581d-4441-a9d6-e69217071c87)# Bengaluru Metro System
 
 ## Overview
 
@@ -46,33 +45,25 @@ The Bengaluru Metro System project provides a GUI interface for calculating metr
    - **Reset Button:** Resets the selection and information displayed.
 ## Sample Output
 
-   <p align="center">
-![main](https://github.com/user-attachments/assets/a3ed538d-6aa6-4912-80ce-77f82844bb01)
+ <p align="center">
+  <img src="https://github.com/user-attachments/assets/4bf189a6-1384-4ba0-85a5-f6fb12d1bba7" alt="main" width="400px">
+</p>  
+<p align="center">
+  Before Data Entry: Displays the main screen of the application before any data is entered.
+</p>
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/90141aa9-0d24-480c-ae0e-49af54bc3747" alt="error" width="400px">
+</p>
+<p align="center">
+  Error Image: Shows an error message when invalid data is entered or if there are issues with the station information.
+</p>
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4acb78eb-057e-4036-bb0a-16376a1007c3" alt="output" width="400px">
+</p>
+<p align="center">
+  Output Image: Displays the result after processing the data, including travel details and the generated QR code.
+</p>
 
-   </p>  
-   <p align="center">
-   Before Data Entry: Displays the main screen of the application before any data is entered.
-   </p>
-
-   <p align="center">
-
-![error](https://github.com/user-attachments/assets/90141aa9-0d24-480c-ae0e-49af54bc3747)
-
-   </p>
-   <p align="center">
-   Error Image: Shows an error message when invalid data is entered or if there are issues with the station information.
-   </p>
-
-   <p align="center">
-
-     
-![output](https://github.com/user-attachments/assets/4acb78eb-057e-4036-bb0a-16376a1007c3)
-
-     
-   </p>
-   <p align="center">
-   Output Image: Displays the result after processing the data, including travel details and the generated QR code.
-   </p>
 
