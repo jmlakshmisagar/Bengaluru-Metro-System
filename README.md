@@ -1,4 +1,3 @@
-
 ## Overview
 
 The Bengaluru Metro System project provides a GUI interface for calculating metro travel details between stations in Bengaluru(Green and Purple line). The application is built using Python Tkinter and includes functionalities such as route distance, estimated travel time, fare calculation, and QR code generation.
